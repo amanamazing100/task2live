@@ -15,7 +15,7 @@ class Student(models.Model):
 	)
 
 	name = models.CharField(max_length=30, null=True)
-	roll = models.CharField(max_length=9, null=True)
+	roll = models.CharField(max_length=9, primary_key=True)
 	dept = models.CharField(max_length=10, null=True, choices=CHOICES)
 
 	def __str__(self):
