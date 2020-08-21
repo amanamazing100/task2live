@@ -27,7 +27,15 @@ def homeView(request):
 	students = Student.objects.all()
 	searchfilter = SearchFilter(request.GET, queryset=students)
 	students = searchfilter.qs
+	arr1 = []
+	#arr2 = []
+	for x in students:
+		arr1.append(x.name)
+		#arr2.append(x.roll)
+	print(arr1)
 	context = {
+			'arr1': arr1,
+			#'arr2': arr2,
 			'students': students,
 			'filter': searchfilter,
 	}
