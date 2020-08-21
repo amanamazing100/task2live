@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+	<form method="get" action="">
+		{{filter.form}}
+		<input type="submit" value="search">
+	</form>
+</head>
+<body>
+	<br>
+	<strong><a href="{% url 'create' %}">Add New Student</a></strong>
+	<br>
+<table style="margin:10px 10px 10px 10px;">
+		<th>Name</th><th>Roll</th><th>Dept</th>
+{%for student in students%}
+<tr>
+<td style="margin:0px 0px 0px 0px; padding:5px 5px 5px 5px; border-width:1px 0px 1px 0px;border-style:solid;border-color: #000;">{{student.name}}</td>
+<td style="margin:0px 0px 0px 0px;border-width:1px 0px 1px 0px; padding:5px 5px 5px 5px;border-style:solid;border-color: #000;">{{student.roll}}</td>
+<td style="padding:5px 5px 5px 5px;margin:0px 0px 0px 0px; border-width:1px 0px 1px 0px;border-style:solid;border-color: #000;">{{student.dept}}</td>
+<td><a href="{{student.get_absolute_url}}">update</a></td>
+<td><a href="{{student.get_ab_url}}">delete</a></td>
+</tr>
+{%endfor%}
+</table>
+</body>
+</html>
