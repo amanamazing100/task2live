@@ -12,6 +12,11 @@ def createStudent(request):
 		if form.is_valid():
 			form.save()
 			return redirect('home')
+		else:
+			context = {
+			'form': form,
+			}
+			return render(request, 'new.html', context)
 	context = {
 		'form': form,
 	}
@@ -28,8 +33,8 @@ def homeView(request):
 	}
 	return render(request, 'home.html', context)
 
-def updateStudent(request, id):
-	student = Student.objects.get(id=id)
+def updateStudent(request, roll):
+	student = Student.objects.get(roll=id)
 	print(id)
 	form = CreateStudentForm(request.POST or None, instance=student)
 	print(student.name)
@@ -42,8 +47,8 @@ def updateStudent(request, id):
 	}
 	return render(request, 'update.html', context)
 
-def deleteStudent(request, id):
-	student = Student.objects.get(id=id)
+def deleteStudent(request, roll):
+	student = Student.objects.get(roll=id)
 	student.delete()
 	return redirect('home')
 	context = {
