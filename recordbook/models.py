@@ -22,7 +22,7 @@ class Student(models.Model):
 		return self.name
 
 	def get_absolute_url(self):
-		return reverse('update', kwargs={'id': self.id})
+		return reverse('update', kwargs={'id': self.roll})
 
 	def get_ab_url(self):
-		return reverse('delete', kwargs={'id': self.id})
+		return reverse('delete', kwargs={'id': self.roll})
