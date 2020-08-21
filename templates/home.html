@@ -2,15 +2,45 @@
 <html>
 <head>
 	<title>Home</title>
-	<form method="get" action="">
-		{{filter.form}}
-		<input type="submit" value="search">
-	</form>
+<style>
+	.container{
+		width:60%;
+		margin: 20px auto 60px auto;
+	}
+	.container input{
+
+		border-radius:3px;
+	}
+	.suggestions{
+		width:15.8%;
+		margin:0px auto 0px 223px;
+		border-top:1px solid #999;
+	}
+	.suggestions div{
+		border-radius:3px;
+		padding:1px;
+		border: 1px solid;
+	}
+	.suggestions div:hover{
+		border-radius:3px;
+		padding:1px;
+		border: 1px solid;
+		background-color: grey;
+
+	}
+	</style>
 </head>
 <body>
+<div class='container'>
+	<form action='' method='get' autocomplete='off'>
+	{{filter.form}}
+<!--<input type="text" id="id_name" placeholder="Namesearch" name=''/>-->
+<input type="submit" value="submit">
+<div class='suggestions' id='suggestions'></div></form></div>
 	<br>
 	<strong><a href="{% url 'create' %}">Add New Student</a></strong>
 	<br>
+<div id="match-list"></div>
 <table style="margin:10px 10px 10px 10px;">
 		<th>Name</th><th>Roll</th><th>Dept</th>
 {%for student in students%}
@@ -23,5 +53,32 @@
 </tr>
 {%endfor%}
 </table>
+ <script>
+const students = {{arr1|safe}}
+const searchInput = document.getElementById('id_name');
+const searchResults = document.getElementById('suggestions');
+searchInput.addEventListener('keyup', function(){
+	console.log(searchInput.value);
+	const input = searchInput.value;
+
+	searchResults.innerHTML='';
+	const answers = students.filter(function(studen){
+		return studen.toLowerCase().startsWith(input);
+	});
+	console.log(answers);
+	answers.forEach(function(answer){
+		const div = document.createElement('div');
+		div.setAttribute('id', 'options1');
+		div.innerHTML = answer;
+		searchResults.appendChild(div);
+	div.addEventListener('click', function(){
+		searchInput.value=div.innerHTML;
+	});
+	if (input==''){
+		searchResults.innerHTML='';
+	}
+	})
+})
+ </script> 
 </body>
 </html>
